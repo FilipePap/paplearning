@@ -1,0 +1,501 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en" class="scroll-smooth"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Aotearoa's Coastal Guardians: An Interactive Guide&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Chosen Palette: Coastal Harmony --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Application Structure Plan: A thematic, single-page dashboard design is used to transform the dense report into an intuitive, exploratory experience. The structure flows from understanding ('The Dune Story'), to identifying problems ('Threats &amp; Guardians'), to finding solutions ('Take Action'), and finally to personal connection ('The Garden Link'). This non-linear, thematic approach with a sticky top navigation allows users to explore topics based on interest, rather than following the report's linear structure. This design was chosen to maximize engagement and comprehension for a broader audience (students, volunteers) by making complex ecological information accessible and actionable through interactive components like diagrams, charts, and collapsible guides. --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Visualization &amp; Content Choices:<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>- Dune Formation: Report Info -&gt; Text description of dune formation. Goal -&gt; Inform/Engage. Viz -&gt; Animated HTML/CSS diagram. Interaction -&gt; On-scroll reveal. Justification -&gt; Visually demonstrates a dynamic process more effectively than static text. Method -&gt; HTML/CSS/JS.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>- Native Plants (Table 4): Report Info -&gt; Plant descriptions. Goal -&gt; Compare/Inform. Viz -&gt; Interactive Cards. Interaction -&gt; Click to reveal details. Justification -&gt; Focuses on one plant at a time, preventing info overload. Method -&gt; HTML/JS.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>- Beach Litter (Table 3): Report Info -&gt; List of common litter. Goal -&gt; Compare/Inform. Viz -&gt; Doughnut Chart. Interaction -&gt; Hover for details. Justification -&gt; Clearly visualizes proportions of pollution sources. Library -&gt; Chart.js.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>- Safety Checklist (Table 2): Report Info -&gt; Long list of safety items. Goal -&gt; Inform/Action. Viz -&gt; Collapsible Accordion. Interaction -&gt; Click to expand/collapse. Justification -&gt; Makes a long list digestible. Method -&gt; HTML/JS.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>- Planting Guide: Report Info -&gt; Text on planting techniques. Goal -&gt; Organize/Inform. Viz -&gt; Step-by-step process diagram. Interaction -&gt; Hover to see details. Justification -&gt; Simplifies a complex procedure. Method -&gt; HTML/CSS/JS.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>- Contacts (Table 1): Report Info -&gt; Contact details. Goal -&gt; Action. Viz -&gt; Contact Cards. Justification -&gt; More organized and user-friendly than a raw table. Method -&gt; HTML.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>- Runoff Process: Report Info -&gt; Text linking land and sea. Goal -&gt; Show Relationships. Viz -&gt; Animated Flow Diagram. Justification -&gt; Visually establishes the core "Ki Uta Ki Tai" concept. Method -&gt; HTML/CSS/JS.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>--&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body { font-family: 'Inter', sans-serif; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chart-container { position: relative; width: 100%; max-width: 450px; margin-left: auto; margin-right: auto; height: 350px; max-height: 450px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (min-width: 768px) { .chart-container { height: 400px; } }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.plant-card-active { border-color: #0d9488; transform: scale(1.05); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.step-indicator::after { content: ''; position: absolute; top: 1.25rem; left: 100%; width: 100%; height: 2px; background-color: #d1d5db; z-index: -1; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.step-group:last-child .step-indicator::after { display: none; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="bg-slate-50 text-slate-800"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;nav class="container mx-auto px-6 py-4 flex justify-between items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 class="text-xl md:text-2xl font-bold text-teal-700"&gt;Aotearoa's Coastal Guardians&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="hidden md:flex space-x-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#dunes" class="text-slate-600 hover:text-teal-600"&gt;The Dune Story&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#threats" class="text-slate-600 hover:text-teal-600"&gt;Threats &amp; Guardians&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#action" class="text-slate-600 hover:text-teal-600"&gt;Take Action&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#garden" class="text-slate-600 hover:text-teal-600"&gt;The Garden Link&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button id="mobile-menu-button" class="md:hidden text-slate-600 focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"&gt;&lt;/path&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/nav&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="mobile-menu" class="hidden md:hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="#dunes" class="block py-2 px-6 text-slate-600 hover:bg-teal-50"&gt;The Dune Story&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="#threats" class="block py-2 px-6 text-slate-600 hover:bg-teal-50"&gt;Threats &amp; Guardians&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="#action" class="block py-2 px-6 text-slate-600 hover:bg-teal-50"&gt;Take Action&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="#garden" class="block py-2 px-6 text-slate-600 hover:bg-teal-50"&gt;The Garden Link&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;main class="container mx-auto px-6 py-8 md:py-12"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="dunes" class="mb-16 md:mb-24 text-center scroll-mt-20"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-3xl md:text-4xl font-bold mb-4 text-teal-800"&gt;The Story of a Dune&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="max-w-3xl mx-auto text-slate-600 mb-8"&gt;Sand dunes are more than just hills of sand; they are Aotearoa's living, breathing coastal defence. This section explores how these vital ecosystems are formed and introduces the native plant heroes—our natural kaitiaki (guardians)—that build and protect them.&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white p-6 rounded-lg shadow-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-2xl font-bold mb-6 text-left"&gt;How Dunes Are Built&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex flex-col md:flex-row items-center justify-center gap-8 text-left"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="w-full md:w-1/2 space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex items-start gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex-shrink-0 w-10 h-10 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center font-bold text-lg"&gt;1&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-semibold"&gt;Wind &amp; Sand&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-slate-600 text-sm"&gt;Onshore winds pick up dry sand from the beach and carry it inland.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex items-start gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex-shrink-0 w-10 h-10 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center font-bold text-lg"&gt;2&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-semibold"&gt;The First Obstacle&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-slate-600 text-sm"&gt;The wind-blown sand meets an obstacle, like a piece of driftwood or the beginning of vegetation.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex items-start gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex-shrink-0 w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold text-lg"&gt;3&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-semibold"&gt;Sand Trapping Plants&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-slate-600 text-sm"&gt;Specialist native plants, like Pīngao and Spinifex, trap the sand with their leaves and complex root systems.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex items-start gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex-shrink-0 w-10 h-10 bg-sky-100 text-sky-600 rounded-full flex items-center justify-center font-bold text-lg"&gt;4&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-semibold"&gt;Dune Growth&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-slate-600 text-sm"&gt;Over time, more sand is trapped, and the dune grows taller and wider, forming a natural barrier that protects the land.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="w-full md:w-1/2 h-64 bg-sky-50 rounded-lg flex items-end p-4 relative overflow-hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="absolute bottom-0 left-0 w-full h-1/3 bg-amber-300"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="absolute bottom-0 left-0 w-full h-2 bg-sky-300"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div style="clip-path: polygon(0 100%, 100% 100%, 100% 40%, 75% 60%, 50% 30%, 25% 70%, 0 50%);" class="absolute bottom-1/3 left-0 w-full h-2/3 bg-amber-400"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="absolute top-4 right-4 text-sky-500 opacity-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"&gt;&lt;path fill-rule="evenodd" d="M15.5,8.13a4.5,4.5,0,0,0-8.62-2,5.5,5.5,0,0,0-1.29,10.88H15.5a4.5,4.5,0,0,0,0-9Z" clip-rule="evenodd"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="absolute top-1/2 left-1/4 text-2xl animate-pulse"&gt;🌬️&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="plant-section" class="mt-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-2xl font-bold mb-6"&gt;Meet the Dune Kaitiaki&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div id="pingao-card" class="plant-card p-4 bg-white rounded-lg shadow-md cursor-pointer border-2 border-transparent transition-all duration-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="text-xl font-bold text-amber-600"&gt;Pīngao (Golden Sand Sedge)&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-600"&gt;An endemic hero, recognised by its stunning golden-orange leaves.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div id="spinifex-card" class="plant-card p-4 bg-white rounded-lg shadow-md cursor-pointer border-2 border-transparent transition-all duration-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="text-xl font-bold text-gray-500"&gt;Spinifex (Silvery Sand Grass)&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-600"&gt;A key pioneer plant with silvery leaves and rolling seed heads.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="bg-white p-6 rounded-lg shadow-lg text-left sticky top-24"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h4 id="plant-title" class="text-2xl font-bold mb-2"&gt;&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p id="plant-description" class="text-slate-600 mb-4"&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="space-y-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;p class="text-sm"&gt;&lt;strong class="font-semibold text-teal-700"&gt;Ecological Role:&lt;/strong&gt; &lt;span id="plant-role"&gt;&lt;/span&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;p class="text-sm"&gt;&lt;strong class="font-semibold text-teal-700"&gt;Ideal Conditions:&lt;/strong&gt; &lt;span id="plant-conditions"&gt;&lt;/span&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="threats" class="mb-16 md:mb-24 text-center scroll-mt-20"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-3xl md:text-4xl font-bold mb-4 text-rose-800"&gt;Threats to Our Coastline&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="max-w-3xl mx-auto text-slate-600 mb-12"&gt;Our precious dunes and oceans face numerous threats, from pollution to invasive species. Understanding these challenges is the first step toward becoming effective guardians. This section highlights the major issues and quantifies the problem of marine debris.&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white p-6 rounded-lg shadow-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-2xl font-bold mb-2"&gt;The Problem with Beach Litter&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-slate-600 mb-6 max-w-2xl mx-auto"&gt;Data collected from New Zealand beach clean-ups reveals a troubling pattern. The chart below shows the most common types of litter found, most of which originates on land. Hover over a section to see its impact.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="chart-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;canvas id="litterChart"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="action" class="mb-16 md:mb-24 scroll-mt-20"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-3xl md:text-4xl font-bold mb-4 text-center text-sky-800"&gt;Mahi Tahi Tātou: Take Action&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="max-w-3xl mx-auto text-slate-600 mb-12 text-center"&gt;Knowledge becomes powerful when we act on it. Here you'll find practical guides for safely participating in conservation efforts, from essential safety protocols to a step-by-step guide for planting your own dune guardians.&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="bg-white p-6 rounded-lg shadow-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3 class="text-2xl font-bold mb-4"&gt;Dune Work Safety Checklist&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-slate-600 mb-6"&gt;Your safety is the top priority. Before heading out, review these critical safety points. Click each category to expand.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="accordion-container" class="space-y-2"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="bg-white p-6 rounded-lg shadow-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3 class="text-2xl font-bold mb-4"&gt;How to Plant a Dune Guardian&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>&lt;p class="text-slate-600 mb-6"&gt;Follow these expert-approved steps to give native plants the best chance of survival and success in building our dunes.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="relative flex items-start step-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;div class="flex items-center flex-shrink-0 step-indicator"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="w-10 h-10 rounded-full bg-teal-500 text-white flex items-center justify-center"&gt;1&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;div class="ml-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                 </span>&lt;h4 class="font-semibold"&gt;Eco-Source&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                 </span>&lt;p class="text-slate-600 text-sm"&gt;Use plants grown from local seeds to ensure they are adapted to the area.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>&lt;div class="relative flex items-start step-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;div class="flex items-center flex-shrink-0 step-indicator"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="w-10 h-10 rounded-full bg-teal-500 text-white flex items-center justify-center"&gt;2&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;div class="ml-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                 </span>&lt;h4 class="font-semibold"&gt;Timing is Key&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                 </span>&lt;p class="text-slate-600 text-sm"&gt;Plant between June and September (winter/spring) for best results.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="relative flex items-start step-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex items-center flex-shrink-0 step-indicator"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                               </span>&lt;div class="w-10 h-10 rounded-full bg-teal-500 text-white flex items-center justify-center"&gt;3&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="ml-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-semibold"&gt;Plant Deep&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-slate-600 text-sm"&gt;Bury the root ball 10-20cm below the sand to reach moisture and prevent erosion.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                       </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                       </span>&lt;div class="relative flex items-start step-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex items-center flex-shrink-0 step-indicator"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                           </span>&lt;div class="w-10 h-10 rounded-full bg-teal-500 text-white flex items-center justify-center"&gt;4&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="ml-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-semibold"&gt;Handle with Care&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-600 text-sm"&gt;Gently handle seedlings by the root ball to avoid damaging delicate roots and stems.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                   </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                   </span>&lt;div class="relative flex items-start step-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-center flex-shrink-0 step-indicator"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                       </span>&lt;div class="w-10 h-10 rounded-full bg-teal-500 text-white flex items-center justify-center"&gt;5&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="ml-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h4 class="font-semibold"&gt;Check for Pests&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-slate-600 text-sm"&gt;Before planting, check all materials for invasive pests like Argentine ants.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">               </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">             </span>&lt;div class="mt-12 bg-white p-6 rounded-lg shadow-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-2xl font-bold mb-4 text-center"&gt;Find Local Kaitiaki Groups&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-slate-600 mb-6 text-center max-w-3xl mx-auto"&gt;Connecting with local experts is the best way to get involved. These organisations provide support, resources, and guidance for community conservation projects in the Bay of Plenty.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="border border-slate-200 rounded-lg p-4 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h4 class="font-bold text-lg text-teal-700"&gt;Coast Care Bay of Plenty&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-sm text-slate-500 mb-2"&gt;Primary contact for dune restoration.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="mailto:info@coastcare.co.nz" class="text-teal-600 hover:underline text-sm block"&gt;info@coastcare.co.nz&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="tel:0800884880" class="text-teal-600 hover:underline text-sm block"&gt;0800 884 880&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="border border-slate-200 rounded-lg p-4 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h4 class="font-bold text-lg text-teal-700"&gt;Tauranga City Council&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-sm text-slate-500 mb-2"&gt;Natural Environment Specialist.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="mailto:info@tauranga.govt.nz" class="text-teal-600 hover:underline text-sm block"&gt;info@tauranga.govt.nz&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="tel:075777000" class="text-teal-600 hover:underline text-sm block"&gt;07 577 7000&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="border border-slate-200 rounded-lg p-4 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h4 class="font-bold text-lg text-teal-700"&gt;Department of Conservation (DOC)&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-sm text-slate-500 mb-2"&gt;Permissions and conservation advice.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="mailto:taurangainfo@doc.govt.nz" class="text-teal-600 hover:underline text-sm block"&gt;taurangainfo@doc.govt.nz&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="tel:0800275362" class="text-teal-600 hover:underline text-sm block"&gt;0800 ASK DOC&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="garden" class="scroll-mt-20"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-3xl md:text-4xl font-bold mb-4 text-center text-green-800"&gt;The Garden Link: From Our Soil to the Sea&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="max-w-3xl mx-auto text-slate-600 mb-12 text-center"&gt;The principle of 'Ki Uta Ki Tai'—from the mountains to the sea—reminds us that everything is connected. Actions in our own backyards and school gardens have a direct impact on the health of our oceans. This section explores that link and how sustainable gardening can be part of the solution.&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white p-6 rounded-lg shadow-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-2xl font-bold mb-6 text-center"&gt;How Land Pollution Reaches the Ocean&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="relative p-8 overflow-hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex flex-col md:flex-row items-center justify-between gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;div class="text-5xl"&gt;🏡&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-semibold mt-2"&gt;Garden &amp; Urban Area&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-500"&gt;Fertilisers, plastics, soil&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="text-2xl text-sky-500 font-bold my-4 md:my-0"&gt;→&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>&lt;div class="text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>&lt;div class="text-5xl"&gt;🌧️&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-semibold mt-2"&gt;Stormwater Runoff&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-500"&gt;Rain washes pollutants&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="text-2xl text-sky-500 font-bold my-4 md:my-0"&gt;→&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>&lt;div class="text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-5xl"&gt;🌊&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-semibold mt-2"&gt;Waterways &amp; Ocean&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-500"&gt;Pollution harms marine life&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mt-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>&lt;h3 class="text-2xl font-bold mb-4 text-center"&gt;Sustainable Garden Solutions&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>&lt;p class="text-slate-600 mb-6 text-center max-w-2xl mx-auto"&gt;By adopting these practices, your garden can become a 'sponge' that helps protect our waterways instead of polluting them.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>&lt;div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-green-50 p-4 rounded-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-semibold text-green-800"&gt;Composting&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-600"&gt;Reduces landfill waste and creates natural fertiliser, improving soil health so it can absorb more water.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-green-50 p-4 rounded-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-semibold text-green-800"&gt;Rainwater Harvesting&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-600"&gt;Use rain barrels to capture water for irrigation, reducing runoff and conserving treated water.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                         </span>&lt;div class="bg-green-50 p-4 rounded-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-semibold text-green-800"&gt;Mulching&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-600"&gt;A layer of organic mulch helps soil retain moisture and prevents soil erosion during heavy rain.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-green-50 p-4 rounded-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-semibold text-green-800"&gt;Native Planting&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-600"&gt;Choose native plants adapted to local conditions; they require less water and fertiliser.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-green-50 p-4 rounded-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-semibold text-green-800"&gt;Organic Pest Control&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-600"&gt;Avoids chemical pesticides that can wash into waterways and harm aquatic life.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-green-50 p-4 rounded-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-semibold text-green-800"&gt;Create a Rain Garden&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-slate-600"&gt;A dedicated shallow garden designed to temporarily hold and soak in rainwater runoff.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;footer class="bg-slate-800 text-white mt-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="container mx-auto px-6 py-8 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="font-semibold"&gt;He waka eke noa - We are all in this together.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-sm text-slate-400 mt-2"&gt;This interactive guide was created to empower local communities in the stewardship of Aotearoa's beautiful coastlines.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/footer&gt;</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">document.addEventListener('DOMContentLoaded', function () {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const plantData = {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>pingao: {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>title: "Pīngao (Golden Sand Sedge)",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>description: "Pīngao is an endemic species, meaning it's found only in New Zealand. It is a primary dune builder, trapping sand with its stiff, golden leaves and binding it with long, rope-like underground stems (rhizomes).",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>role: "A true ecosystem engineer, it stabilizes sand to build the foredune, creating habitat for other species. Its leaves were also prized by Māori for weaving.",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>conditions: "Thrives in exposed, unstable, and bare sites on the active seaward face of the dune."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>spinifex: {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>title: "Spinifex (Silvery Sand Grass)",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>description: "A vital native pioneer plant with a silvery-green appearance and coarse runners that creep across the sand. Its large, spiky seedheads break off and roll along the beach, spreading seeds.",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>role: "Reduces wind speed at the sand surface, causing sand to deposit and build up the front of the dune. It's highly tolerant of salt and drought.",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>conditions: "Grows on the seaward slope and all parts of the frontal dune, in full sun and moving sand."</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const pingaoCard = document.getElementById('pingao-card');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const spinifexCard = document.getElementById('spinifex-card');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const plantTitle = document.getElementById('plant-title');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const plantDescription = document.getElementById('plant-description');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const plantRole = document.getElementById('plant-role');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const plantConditions = document.getElementById('plant-conditions');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const plantCards = document.querySelectorAll('.plant-card');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function updatePlantInfo(plantKey) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const data = plantData[plantKey];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>plantTitle.textContent = data.title;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>plantDescription.textContent = data.description;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>plantRole.textContent = data.role;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>plantConditions.textContent = data.conditions;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>plantCards.forEach(card =&gt; card.classList.remove('plant-card-active'));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById(`${plantKey}-card`).classList.add('plant-card-active');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>pingaoCard.addEventListener('click', () =&gt; updatePlantInfo('pingao'));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>spinifexCard.addEventListener('click', () =&gt; updatePlantInfo('spinifex'));</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>updatePlantInfo('pingao');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const litterCtx = document.getElementById('litterChart').getContext('2d');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const litterChart = new Chart(litterCtx, {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>type: 'doughnut',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>labels: ['Cigarette Butts', 'Plastic Food Wrappers', 'Plastic Bottle Caps', 'Plastic Bags', 'Other Plastics', 'Fishing Gear'],</p>
+<p class="p1"><span class="Apple-converted-space">            </span>datasets: [{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>label: 'Common Beach Litter',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data: [25, 20, 15, 12, 18, 10],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>backgroundColor: [</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'#f59e0b', // amber-500</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'#ef4444', // red-500</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'#3b82f6', // blue-500</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'#10b981', // emerald-500</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'#6366f1', // indigo-500</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'#64748b'<span class="Apple-converted-space">  </span>// slate-500</p>
+<p class="p1"><span class="Apple-converted-space">                </span>],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>borderColor: '#f8fafc',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>borderWidth: 4,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>hoverOffset: 16</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}]</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>responsive: true,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>maintainAspectRatio: false,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>plugins: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>legend: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>position: 'bottom',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>labels: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>padding: 20,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>font: { size: 12 }</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tooltip: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>enabled: true,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>backgroundColor: '#1e293b',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>titleFont: { size: 16 },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bodyFont: { size: 12 },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>padding: 12,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>callbacks: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>label: function(context) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>let label = context.label || '';</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>if (label) {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>label += ': ';</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>if (context.parsed !== null) {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>label += context.parsed + '% of surveyed litter.';</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>return label;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>afterLabel: function(context) {</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>const impacts = {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>'Cigarette Butts': 'Impact: Leaches toxic chemicals, microplastic pollution.',</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>'Plastic Food Wrappers': 'Impact: Easily ingested by marine life, persists for centuries.',</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>'Plastic Bottle Caps': 'Impact: Top item ingested by seabirds, breaks into fragments.',</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>'Plastic Bags': 'Impact: Entanglement hazard, mistaken for food by turtles.',</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>'Other Plastics': 'Impact: Breaks down into microplastics, entering the food chain.',</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>'Fishing Gear': 'Impact: "Ghost fishing" continues to trap and kill marine animals.'</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>};</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>return impacts[context.label] || '';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cutout: '60%',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const safetyData = [</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{</p>
+<p class="p1"><span class="Apple-converted-space">            </span>title: 'Environmental Hazards',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>content: 'Plan around tides and daylight. Protect against intense NZ sun (hat, sunscreen). Beware of temperature extremes (hypo/hyperthermia) and stay hydrated. Wear sturdy footwear for slippery surfaces.'</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{</p>
+<p class="p1"><span class="Apple-converted-space">            </span>title: 'Biological Hazards',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>content: 'Learn about local marine life. Never touch unknown creatures (e.g., jellyfish). Shuffle feet when wading to deter stingrays. Do not put hands in dark crevices.'</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{</p>
+<p class="p1"><span class="Apple-converted-space">            </span>title: 'Physical Hazards',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>content: 'Wear gloves and shoes to prevent cuts from shells or glass. Be cautious of vehicles on beaches. Avoid working near unstable cliffs.'</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{</p>
+<p class="p1"><span class="Apple-converted-space">            </span>title: 'Group Management',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>content: 'Maintain active adult supervision. Use a buddy system. Have a clear communication plan and emergency contacts ready. Ensure a first aid kit is on hand.'</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const accordionContainer = document.getElementById('accordion-container');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>safetyData.forEach((item, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const accordionItem = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>accordionItem.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="accordion-button w-full text-left font-semibold p-4 bg-slate-100 hover:bg-slate-200 rounded-lg flex justify-between items-center transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span&gt;${item.title}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="transform transition-transform duration-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"&gt;&lt;/path&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="accordion-content bg-white p-4 rounded-b-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-slate-600 text-sm"&gt;${item.content}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>accordionContainer.appendChild(accordionItem);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const accordionButtons = document.querySelectorAll('.accordion-button');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>accordionButtons.forEach(button =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>button.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const content = button.nextElementSibling;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const icon = button.querySelector('span:last-child');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (content.style.maxHeight) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>content.style.maxHeight = null;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>icon.classList.remove('rotate-180');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.querySelectorAll('.accordion-content').forEach(c =&gt; c.style.maxHeight = null);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.querySelectorAll('.accordion-button span:last-child').forEach(i =&gt; i.classList.remove('rotate-180'));</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>content.style.maxHeight = content.scrollHeight + "px";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>icon.classList.add('rotate-180');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const mobileMenuButton = document.getElementById('mobile-menu-button');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const mobileMenu = document.getElementById('mobile-menu');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>mobileMenuButton.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>mobileMenu.classList.toggle('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const navLinks = document.querySelectorAll('#mobile-menu a');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>navLinks.forEach(link =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>link.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>mobileMenu.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1">});</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
